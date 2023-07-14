@@ -34,7 +34,8 @@ Amat = as.matrix(makeA(pedigree = pedigree))
 #CS
 mod1 = asreml(pf ~ Years + Replicates + Years:Replicates,
               random = ~vm(Hybrids,Amat)+ vm(Hybrids,Amat):idv(Years) + Plots,
-              data = dataset, maxiter=100)
+              data = dataset, maxiter=100, 
+              na.action = na.method(x="include", y = "include"))
 sum1 = summary(mod1)$varcomp
 aic1 = summary(mod1)$aic
 logl1 = summary(mod1)$loglik
@@ -51,7 +52,8 @@ her1 = 1-(MVdelta/(2*summary(mod1)$varcomp[1,1]))
 #DIAG
 mod2 = asreml(pf ~ Years + Replicates + Years:Replicates,
               random = ~vm(Hybrids,Amat):idh(Years) + Plots,
-              data = dataset, maxiter=100)
+              data = dataset, maxiter=100, 
+              na.action = na.method(x="include", y = "include"))
 mod2 = update(mod2)
 sum2 = summary(mod2)$varcomp
 aic2 = summary(mod2)$aic
@@ -80,7 +82,8 @@ mean(her2,na.rm = T)
 #AR1 
 mod3 = asreml(pf ~ Years + Replicates + Years:Replicates,
               random = ~vm(Hybrids,Amat):ar1v(Years) + Plots,
-              data = dataset, maxiter = 100)
+              data = dataset, maxiter = 100, 
+              na.action = na.method(x="include", y = "include"))
 #mod3 = update(mod3)
 sum3 = summary(mod3)$varcomp
 aic3 = summary(mod3)$aic
@@ -99,7 +102,8 @@ her3 = 1-(MVdelta/(2*sum3[grep('var',rownames(sum3)),1]))
 #AR1H
 mod4 = asreml(pf ~ Years + Replicates + Years:Replicates,
               random = ~vm(Hybrids,Amat):ar1h(Years) + Plots,
-              data = dataset, maxiter = 100)
+              data = dataset, maxiter = 100, 
+              na.action = na.method(x="include", y = "include"))
 mod4 = update(mod4)
 sum4 = summary(mod4)$varcomp
 aic4 = summary(mod4)$aic
@@ -125,7 +129,8 @@ mean(her4,na.rm = T)
 #CORH
 mod5 = asreml(pf ~ Years + Replicates + Years:Replicates,
               random = ~vm(Hybrids,Amat):corh(Years) + Plots,
-              data = dataset,maxiter = 100)
+              data = dataset,maxiter = 100, 
+              na.action = na.method(x="include", y = "include"))
 
 sum5 = summary(mod5)$varcomp
 aic5 = summary(mod5)$aic
@@ -151,7 +156,8 @@ mean(her5,na.rm = T)
 #US - Did not converge
 mod6 = asreml(pf ~ Years + Replicates + Years:Replicates,
               random = ~vm(Hybrids,Amat):us(Years) + Plots,
-              data = dataset, maxiter= 100)
+              data = dataset, maxiter= 100, 
+              na.action = na.method(x="include", y = "include"))
 sum6 = summary(mod6)$varcomp
 aic6 = summary(mod6)$aic
 logl6 = summary(mod6)$loglik
@@ -159,7 +165,8 @@ logl6 = summary(mod6)$loglik
 #FA1
 mod7 = asreml(pf ~ Years + Replicates + Years:Replicates,
               random = ~vm(Hybrids,Amat):fa(Years,1) + Plots,
-              data = dataset, maxiter= 100)
+              data = dataset, maxiter= 100, 
+              na.action = na.method(x="include", y = "include"))
 sum7 = summary(mod7)$varcomp
 aic7 = summary(mod7)$aic
 logl7 = summary(mod7)$loglik
@@ -313,7 +320,8 @@ mean(her8, na.rm = T)
 
 mod9 = asreml(pf ~ Years + Replicates + Years:Replicates,
               random = ~vm(Hybrids,Amat):fa(Years,3)+ Plots,
-              data = dataset, maxiter= 100)
+              data = dataset, maxiter= 100, 
+              na.action = na.method(x="include", y = "include"))
 mod9=update(mod9)
 sum9 = summary(mod9)$varcomp
 aic9 = summary(mod9)$aic
@@ -476,7 +484,8 @@ mean(her10, na.rm = T)
 mod11 = asreml(pf ~ Years + Replicates + Years:Replicates,
                random = ~vm(Hybrids,Amat):fa(Years,3)+ Plots,
                residual = ~dsum(~id(units)|Years),
-               data = dataset, maxiter= 100)
+               data = dataset, maxiter= 100, 
+              na.action = na.method(x="include", y = "include"))
 mod11=update(mod11)
 sum11 = summary(mod11)$varcomp
 aic11 = summary(mod11)$aic
@@ -558,7 +567,8 @@ mean(her11, na.rm = T)
 mod12 = asreml(pf ~ Years + Replicates + Years:Replicates,
                random = ~vm(Hybrids,Amat):fa(Years,3)+ Plots,
                residual = ~ar1(Years):Plots,
-               data = dataset, maxiter= 120)
+               data = dataset, maxiter= 120, 
+              na.action = na.method(x="include", y = "include"))
 mod12=update(mod12)
 sum12 = summary(mod12)$varcomp
 aic12 = summary(mod12)$aic
